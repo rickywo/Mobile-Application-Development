@@ -21,6 +21,7 @@ public class MovieAdapter extends SimpleAdapter {
 //				.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 	}
 
+
 	/*@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
 

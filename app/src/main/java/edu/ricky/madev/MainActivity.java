@@ -2,8 +2,11 @@ package edu.ricky.madev;
 
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 
 import java.util.ArrayList;
@@ -51,6 +54,19 @@ public class MainActivity extends ActionBarActivity {
 
         // Setting the adapter to the listView
         listView.setAdapter(adapter);
+
+        //
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position,
+                                    long id) {
+                Log.i("MAD", "Item Clicked");
+            }
+        });
+    }
+
+    public MainActivity() {
+        super();
     }
 
     @Override
