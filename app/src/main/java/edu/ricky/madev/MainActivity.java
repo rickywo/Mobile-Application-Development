@@ -1,5 +1,6 @@
 package edu.ricky.madev;
 
+import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -8,6 +9,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -60,7 +62,9 @@ public class MainActivity extends ActionBarActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position,
                                     long id) {
-                Log.i("MAD", "Item Clicked");
+                TextView tv = (TextView) view.findViewById(R.id.tv_mvTitle);
+                Log.i("MAD", tv.getText().toString());
+                startActivity(new Intent("edu.ricky.madev.MOVIEDETAIL"));
             }
         });
     }

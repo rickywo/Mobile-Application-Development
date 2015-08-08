@@ -1,10 +1,8 @@
 package edu.ricky.madev;
 
 import android.app.Activity;
-import android.app.Application;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
 import android.view.animation.AlphaAnimation;
 import android.widget.ImageView;
 
