@@ -7,6 +7,9 @@
     <ListView
         android:id="@+id/listview"
         android:layout_width="fill_parent"
-        android:layout_height="fill_parent"/>
+        android:layout_height="wrap_content"
+        android:divider="@android:color/transparent"
+        android:dividerHeight="4dp"
+        android:listSelector="@drawable/listview_layout_selector"/>
 
 </RelativeLayout>

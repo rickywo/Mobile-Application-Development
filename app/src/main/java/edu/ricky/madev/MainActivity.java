@@ -3,7 +3,6 @@ package edu.ricky.madev;
 import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -15,37 +14,40 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import edu.ricky.madev.model.MovieEvent;
+
 
 public class MainActivity extends ActionBarActivity {
-    // Array of strings storing country names
-    int[] images = MovieFeeder.getMovieImages();
-    String[] titles = MovieFeeder.getMovieTitles();
-    String[] years = MovieFeeder.getMovieYears();
-    String[] genres = MovieFeeder.getMovieGenres();
-
-
+    static int currentSelectedMovie;
+    static ArrayList<MovieEvent> me = new ArrayList<MovieEvent>();
+    static HashMap<String, MovieEvent> movieEventHashMap = new HashMap<String, MovieEvent>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        // Each row in the list stores country name, currency and flag
+        // Load movie list
+        MovieEvent.MovieEventModel model = new MovieEvent.MovieEventModel();
+        me = model.getEvents();
+        // Each row in the list stores img, title, year, genre
         List<HashMap<String,String>> aList = new ArrayList<HashMap<String,String>>();
 
-        for(int i=0;i<7;i++){
+        for(MovieEvent m: me){
+            movieEventHashMap.put(m.getTitle(), m);
             HashMap<String, String> hm = new HashMap<String,String>();
-            hm.put("img", Integer.toString(images[i]) );
-            hm.put("title", titles[i]);
-            hm.put("year", years[i]);
-            hm.put("genre", genres[i]);
+            hm.put("img", Integer.toString(m.getImg()) );
+            hm.put("title", m.getTitle());
+            hm.put("year", m.getYear());
+            hm.put("genre", m.getGenre());
+            hm.put("rating", m.getImdbRating());
             //hm.put("uri","http://ia.media-imdb.com/images/M/MV5BMTQ1MjQwMTE5OF5BMl5BanBnXkFtZTgwNjk3MTcyMDE@._V1_SX300.jpg");
             aList.add(hm);
         }
 
         // Keys used in Hashmap
-        String[] from = { "img","title","year","genre" };
+        String[] from = { "img","title","year","genre", "rating" };
 
         // Ids of views in listview_layout
-        int[] to = { R.id.iv_mvPoster,R.id.tv_mvTitle,R.id.tv_mvYear,R.id.tv_mvGenre};
+        int[] to = { R.id.iv_mvPoster,R.id.tv_mvTitle,R.id.tv_mvYear,R.id.tv_mvGenre, R.id.tv_imdbrating};
 
         // Instantiating an adapter to store each items
         // R.layout.listview_layout defines the layout of each item
@@ -63,8 +65,11 @@ public class MainActivity extends ActionBarActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position,
                                     long id) {
                 TextView tv = (TextView) view.findViewById(R.id.tv_mvTitle);
-                Log.i("MAD", tv.getText().toString());
-                startActivity(new Intent("edu.ricky.madev.MOVIEDETAIL"));
+                currentSelectedMovie = position;
+                //Log.i("MAD", tv.getText().toString());
+                Intent intent = new Intent(getBaseContext(), MoviePostActivity.class);
+                intent.putExtra("movie_title", tv.getText().toString());
+                startActivity(intent);
             }
         });
     }
