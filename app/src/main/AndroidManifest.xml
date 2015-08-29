@@ -39,19 +39,11 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".MoviePostActivity"
-            android:configChanges="orientation|keyboardHidden|screenSize"
-            android:label="@string/title_activity_movie_post"
-            android:theme="@style/FullscreenTheme" >
-            <intent-filter>
-                <action android:name="edu.ricky.madev.MOVIEPOST" />
-
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
-        </activity>
-        <activity
-            android:name=".PartyEventActivity"
-            android:label="@string/title_activity_party_event" >
+            android:name=".EventDetailActivity"
+            android:label="@string/title_activity_event_detail">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="edu.ricky.madev.MovieDetailActivity" />
         </activity>
     </application>
 

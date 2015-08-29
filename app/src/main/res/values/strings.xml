@@ -14,5 +14,15 @@
     <string name="save">Save</string>
     <string name="date">Date</string>
     <string name="year">Year</string>
+    <string name="time">Time</string>
     <string name="genre">Genre</string>
+    <string name="title_activity_event_detail">EventDetailActivity</string>
+    <string name="event_title">Event Title</string>
+    <string name="invitee">Invitee</string>
+
+    <string name="hello_world">Hello world!</string>
+    <string name="imdb_rating">IMDB Rating</string>
+    <string name="create_event">Create An Event</string>
+    <string name="plot">Plot</string>
+    <string name="add_contact">Invite Friends</string>
 </resources>

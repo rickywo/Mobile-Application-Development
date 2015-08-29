@@ -1,6 +1,7 @@
 package edu.ricky.madev;
 
 //import java.util.HashMap;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -13,13 +14,21 @@ public class MovieAdapter extends SimpleAdapter {
 //	public LayoutInflater inflater = null;
 
 	public MovieAdapter(Context context,
-			List<? extends Map<String, ?>> data, int resource, String[] from,
-			int[] to) {
+						List<? extends Map<String, ?>> data, int resource, String[] from,
+						int[] to) {
 		super(context, data, resource, from, to);
 //		mContext = context;
 //		inflater = (LayoutInflater) mContext
 //				.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 	}
+/*	public MovieAdapter(Context context,
+			List<? extends Map<String, ?>> data, int resource, String[] from,
+			int[] to) {
+		super(context, data, resource, from, to);
+		mContext = context;
+		inflater = (LayoutInflater) mContext
+				.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+}*/
 
 
 	/*@Override

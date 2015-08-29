@@ -9,7 +9,7 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:divider="@android:color/transparent"
-        android:dividerHeight="4dp"
-        android:listSelector="@drawable/listview_layout_selector"/>
+        android:dividerHeight="@dimen/four_dp"
+        android:listSelector="@drawable/listview_layout_selector" />
 
 </RelativeLayout>

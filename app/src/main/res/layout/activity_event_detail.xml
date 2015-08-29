@@ -1,0 +1,195 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context="edu.ricky.madev.EventDetailActivity">
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:textAlignment="viewEnd">
+
+        <TextView
+            android:id="@+id/event_name_textview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/material_blue_grey_800"
+            android:padding="@dimen/five_dp"
+            android:text="@string/event_title"
+            android:textAlignment="viewEnd"
+            android:textAllCaps="true"
+            android:textColor="@color/background_material_light"
+            android:textStyle="bold"
+            android:textSize="@dimen/abc_text_size_display_1_material"/>
+
+        <GridLayout
+            android:layout_width="fill_parent"
+            android:layout_height="match_parent"
+            android:columnCount="2">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_column="0"
+                android:layout_gravity="fill_horizontal"
+                android:orientation="vertical"
+                android:layout_columnWeight="1">
+
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/material_frame"
+                    android:gravity="center_horizontal"
+                    android:layout_marginTop="@dimen/five_dp"
+                    android:layout_marginRight="@dimen/two_dp"
+                    android:padding="@dimen/five_dp"
+                    android:clickable="true"
+                    android:id="@+id/datePickerButton">
+
+                    <TextView
+                        android:id="@+id/event_date_date_label"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/date"
+                        android:textAppearance="?android:attr/textAppearanceLarge"
+                        android:textColor="@color/secondary_text_default_material_light"
+                        android:textSize="@dimen/abc_text_size_display_2_material" />
+
+                    <TextView
+                        android:id="@+id/event_date_textview"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="19-08-2015" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:background="@drawable/material_frame"
+                    android:gravity="center_horizontal"
+                    android:layout_marginTop="@dimen/five_dp"
+                    android:layout_marginRight="@dimen/two_dp"
+                    android:padding="@dimen/five_dp"
+                    android:clickable="true"
+                    android:id="@+id/venueButton">
+
+                    <TextView
+                        android:id="@+id/event_venue_label"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/venue"
+                        android:textAppearance="?android:attr/textAppearanceLarge"
+                        android:textColor="@color/secondary_text_default_material_light"
+                        android:textSize="@dimen/abc_text_size_display_1_material" />
+
+                    <TextView
+                        android:id="@+id/event_venue_textview"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="RMIT Student Hall" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_column="1"
+                android:layout_gravity="fill"
+                android:orientation="vertical"
+                android:layout_columnWeight="1">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:background="@drawable/material_frame"
+                    android:gravity="center_horizontal"
+                    android:layout_marginLeft="@dimen/two_dp"
+                    android:layout_marginTop="@dimen/five_dp"
+                    android:padding="@dimen/five_dp"
+                    android:clickable="true"
+                    android:id="@+id/timePickerButton">
+
+                    <TextView
+                        android:id="@+id/event_time_label"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/time"
+                        android:textAppearance="?android:attr/textAppearanceLarge"
+                        android:textColor="@color/secondary_text_default_material_light"
+                        android:textSize="@dimen/abc_text_size_display_1_material" />
+
+                    <TextView
+                        android:id="@+id/event_time_textview"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="18:00" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:background="@drawable/material_frame"
+                    android:gravity="center_horizontal"
+                    android:layout_marginTop="@dimen/five_dp"
+                    android:layout_marginLeft="@dimen/two_dp"
+                    android:padding="@dimen/five_dp"
+                    android:id="@+id/posButton"
+                    android:clickable="true">
+
+                    <TextView
+                        android:id="@+id/event_pos_label"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/location"
+                        android:textAppearance="?android:attr/textAppearanceLarge"
+                        android:textColor="@color/secondary_text_default_material_light"
+                        android:textSize="@dimen/abc_text_size_display_2_material" />
+
+                    <TextView
+                        android:id="@+id/event_pos_textview"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="-30.4411,-31.51515" />
+                </LinearLayout>
+
+            </LinearLayout>
+        </GridLayout>
+
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/grey05"
+            android:padding="@dimen/five_dp"
+            android:text="@string/invitee"
+            android:textAlignment="viewEnd"
+            android:textAllCaps="true"
+            android:textColor="@color/background_material_light"
+            android:textStyle="bold" />
+
+        <ListView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/invitee_list"
+            android:layout_marginTop="@dimen/five_dp" />
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/add_contact"
+            android:id="@+id/event_invite_btn"
+            style="?android:attr/borderlessButtonStyle"
+            android:background="@drawable/flat_button"
+            android:textColor="@color/white1" />
+
+    </LinearLayout>
+
+</ScrollView>
