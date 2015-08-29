@@ -68,4 +68,20 @@ public class InviteeArrayAdapter extends ArrayAdapter<Invitee> {
 
         return inviteeItemView;
     }
+
+    public void remove(Invitee object) {
+        if (inviteesList.contains(object)) {
+
+            inviteesList.remove(object);
+        }
+        notifyDataSetChanged();
+    }
+
+    public void add(Invitee object) {
+        if (!inviteesList.contains(object)) {
+
+            inviteesList.add(object);
+        }
+        notifyDataSetChanged();
+    }
 }

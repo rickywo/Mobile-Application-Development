@@ -17,6 +17,7 @@ public class Movie implements Serializable {
     private String imdbId;
     private String genre;
     private String imdbRating;
+    private float rating;
 
     private int img;
     // List for holding event
@@ -29,6 +30,7 @@ public class Movie implements Serializable {
         this.year = year;
         this.genre = genre;
         this.imdbRating = imdbRating;
+        this.rating = 0;
         this.shortPlot = shortPlot;
         this.img = 0;
         this.longPlot = "";
@@ -48,6 +50,14 @@ public class Movie implements Serializable {
 
     public String getImdbRating() {
         return imdbRating;
+    }
+
+    public float getRating() {
+        return rating;
+    }
+
+    public void setRating(float r) {
+        this.rating = r;
     }
 
     public int getImg() {

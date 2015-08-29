@@ -13,6 +13,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListAdapter;
 import android.widget.ListView;
+import android.widget.RatingBar;
 import android.widget.TextView;
 
 import edu.ricky.madev.controller.EventArrayAdapter;
@@ -29,6 +30,8 @@ public class MovieDetailActivity extends ActionBarActivity {
     TextView movieIMDBRating;
     TextView movieYear;
     TextView moviePlot;
+    TextView movieMyRating;
+    RatingBar ratingBar;
     ListView eventList;
     Button createEventbtn;
     // model
@@ -64,6 +67,13 @@ public class MovieDetailActivity extends ActionBarActivity {
                         }
                     }
             );
+            ratingBar.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
+                @Override
+                public void onRatingChanged(RatingBar ratingBar, float rating, boolean fromUser) {
+                    movieMyRating.setText(Float.toString(rating));
+                    movie.setRating(rating);
+                }
+            });
             createEventbtn.setOnClickListener(
                     new View.OnClickListener() {
                         @Override
@@ -110,6 +120,8 @@ public class MovieDetailActivity extends ActionBarActivity {
         movieIMDBRating = (TextView) findViewById(R.id.detail_rating_score);
         movieYear = (TextView) findViewById(R.id.detail_year_textview);
         moviePlot = (TextView) findViewById(R.id.detail_plot_textview);
+        movieMyRating = (TextView) findViewById(R.id.detail_personal_rating_textview);
+        ratingBar = (RatingBar) findViewById(R.id.ratingBar);
         eventList = (ListView) findViewById(R.id.detail_event_listview);
         createEventbtn = (Button) findViewById(R.id.detail_create_event_btn);
     }
@@ -119,6 +131,8 @@ public class MovieDetailActivity extends ActionBarActivity {
         movieIMDBRating.setText(mv.getImdbRating());
         movieYear.setText(mv.getYear());
         moviePlot.setText(mv.getShortPlot());
+        movieMyRating.setText(Float.toString(mv.getRating()));
+        ratingBar.setRating(mv.getRating());
     }
 
     /**** Method for Setting the Height of the ListView dynamically.

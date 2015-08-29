@@ -1,6 +1,7 @@
 package edu.ricky.madev;
 
 import android.app.ActionBar;
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
@@ -43,7 +44,9 @@ import edu.ricky.madev.model.MovieModel;
 
 public class EventDetailActivity extends ActionBarActivity {
     private static final int CONTACT_PICKER_RESULT = 1001;
-    /** Called when the activity is first created. */
+    /**
+     * Called when the activity is first created.
+     */
     TextView eventName;
     TextView eventDate;
     TextView eventTime;
@@ -74,8 +77,7 @@ public class EventDetailActivity extends ActionBarActivity {
             inviteeArrayAdapter = new InviteeArrayAdapter(this, event.getInvitees());
             inviteesList.setAdapter(inviteeArrayAdapter);
             setListViewHeightBasedOnChildren(inviteesList);
-        }
-        else {
+        } else {
             showEventNameDialog();
             event = new Event(eventName.getText().toString());
         }
@@ -85,16 +87,14 @@ public class EventDetailActivity extends ActionBarActivity {
         inviteeArrayAdapter = new InviteeArrayAdapter(this, event.getInvitees());
         inviteesList.setAdapter(inviteeArrayAdapter);
         setListViewHeightBasedOnChildren(inviteesList);
-        inviteesList.setOnItemClickListener(
-                new ListView.OnItemClickListener() {
+        inviteesList.setOnItemLongClickListener(
+                new ListView.OnItemLongClickListener() {
                     @Override
-                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                            /*Intent intent = new Intent(getBaseContext(), EventDetailActivity.class);
-                            Event ev = (Event) eventList.getItemAtPosition(position);
-                            Bundle bundle=new Bundle();
-                            bundle.putSerializable("event", ev);
-                            intent.putExtras(bundle);
-                            startActivity(intent);*/
+                    public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+                        Invitee inv = (Invitee) inviteesList.getItemAtPosition(position);
+                        inviteeArrayAdapter.remove(inv);
+                        setListViewHeightBasedOnChildren(inviteesList);
+                        return false;
                     }
                 }
         );
@@ -121,8 +121,7 @@ public class EventDetailActivity extends ActionBarActivity {
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Intent intent = new Intent(Intent.ACTION_PICK);
-                        intent.setType(ContactsContract.CommonDataKinds.Phone.CONTENT_TYPE);
+                        Intent intent = new Intent(Intent.ACTION_PICK, ContactsContract.Contacts.CONTENT_URI);
                         startActivityForResult(intent, CONTACT_PICKER_RESULT);
                     }
                 }
@@ -158,58 +157,27 @@ public class EventDetailActivity extends ActionBarActivity {
             switch (requestCode) {
                 case CONTACT_PICKER_RESULT:
                     //final EditText phoneInput = (EditText) findViewById(R.id.phoneNumberInput);
-                    Cursor cursor = null;
-                    String phoneNumber = "", name = "";
-                    List<String> allNumbers = new ArrayList<String>();
-                    int phoneIdx = 0;
-                    int nameIdx = 0;
-                    try {
-                        Uri result = data.getData();
-                        String id = result.getLastPathSegment();
-                        cursor = getContentResolver().query(Phone.CONTENT_URI, null, Phone.CONTACT_ID + "=?", new String[] { id }, null);
-                        phoneIdx = cursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone.DATA);
-                        nameIdx = cursor.getColumnIndex(ContactsContract.Contacts.DISPLAY_NAME);
-                        if (cursor.moveToFirst()) {
-                            while (cursor.isAfterLast() == false) {
-                                phoneNumber = cursor.getString(phoneIdx);
-                                name = cursor.getColumnName(nameIdx);
-                                allNumbers.add(phoneNumber);
-                                cursor.moveToNext();
-                            }
-                        } else {
-                            //no results actions
-                        }
-                    } catch (Exception e) {
-                        //error actions
-                    } finally {
-                        if (cursor != null) {
-                            cursor.close();
-                        }
+                    if (resultCode == Activity.RESULT_OK) {
+                        Uri contactData = data.getData();
+                        Cursor c = managedQuery(contactData, null, null, null, null);
+                        if (c.moveToFirst()) {
+                            String id = c.getString(c.getColumnIndexOrThrow(ContactsContract.Contacts._ID));
 
-                        final CharSequence[] items = allNumbers.toArray(new String[allNumbers.size()]);
-                        AlertDialog.Builder builder = new AlertDialog.Builder(EventDetailActivity.this);
-                        builder.setTitle("Choose a number");
-                        builder.setItems(items, new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int item) {
-                                String selectedNumber = items[item].toString();
-                                selectedNumber = selectedNumber.replace("-", "");
-                               // phoneInput.setText(selectedNumber);
-                            }
-                        });
-                        AlertDialog alert = builder.create();
-                        if(allNumbers.size() > 1) {
-                            alert.show();
-                        } else {
-                            String selectedNumber = phoneNumber.toString();
-                            selectedNumber = selectedNumber.replace("-", "");
-                            //phoneInput.setText(selectedNumber);
-                        }
+                            String hasPhone = c.getString(c.getColumnIndex(ContactsContract.Contacts.HAS_PHONE_NUMBER));
 
-                        if (phoneNumber.length() == 0) {
-                            //no numbers found actions
+                            if (hasPhone.equalsIgnoreCase("1")) {
+                                Cursor phones = getContentResolver().query(ContactsContract.CommonDataKinds.Phone.CONTENT_URI, null,
+                                        ContactsContract.CommonDataKinds.Phone.CONTACT_ID + " = " + id, null, null);
+                                phones.moveToFirst();
+                                String cNumber = phones.getString(phones.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER));
+                                String nameContact = c.getString(c.getColumnIndexOrThrow(ContactsContract.Contacts.DISPLAY_NAME));
+                                Log.i("MAD", "before addObj");
+                                inviteeArrayAdapter.add(new Invitee(nameContact, cNumber));
+                                Log.i("MAD", "after addObj");
+                                setListViewHeightBasedOnChildren(inviteesList);
+                            }
                         }
                     }
-                    break;
             }
         } else {
             //activity result error actions

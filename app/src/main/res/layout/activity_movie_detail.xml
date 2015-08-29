@@ -70,25 +70,38 @@
                 android:background="@color/background_material_light"
                 android:padding="@dimen/five_dp">
 
+                <TextView
+                    android:id="@+id/detail_personal_rating_label"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="right"
+                    android:text="@string/your_rating"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:textSize="@dimen/abc_text_size_headline_material"
+                    android:textStyle="bold" />
+                <TextView
+                    android:id="@+id/detail_personal_rating_textview"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="right"
+                    android:text="8.5"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:textSize="@dimen/abc_text_size_headline_material"
+                    android:textStyle="bold" />
+
                 <RatingBar
                     android:id="@+id/ratingBar"
                     style="?android:attr/ratingBarStyleSmall"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="right"
-                    android:isIndicator="false"
-                    android:layout_below="@+id/detail_title_textview"
-                    android:layout_toRightOf="@+id/detail_post_imageview"
-                    android:layout_toEndOf="@+id/detail_post_imageview" />
+                    android:isIndicator="false" />
 
                 <TextView
                     android:id="@+id/detail_year_textview"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="1998"
-                    android:layout_below="@+id/ratingBar"
-                    android:layout_toRightOf="@+id/detail_post_imageview"
-                    android:layout_toEndOf="@+id/detail_post_imageview"
                     android:layout_gravity="right" />
             </LinearLayout>
 

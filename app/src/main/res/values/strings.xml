@@ -25,4 +25,5 @@
     <string name="create_event">Create An Event</string>
     <string name="plot">Plot</string>
     <string name="add_contact">Invite Friends</string>
+    <string name="your_rating">Your Rating</string>
 </resources>
